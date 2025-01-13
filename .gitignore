@@ -42,3 +42,7 @@ lerna-debug.log*
 
 # Miscellaneous
 *.swp
+
+
+# uploads
+uploads/

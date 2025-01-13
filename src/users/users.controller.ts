@@ -11,6 +11,7 @@ import { UpdateUserRoleDto } from './dto/update-user-role.dto';
 import { UpdateUserPermissionsDto } from './dto/update-user-permissions.dto';
 
 @Controller('users')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -20,14 +21,12 @@ export class UsersController {
 //     return this.usersService.create(createUserDto);
 //   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.ADMIN)
   @Get()
   async getUsers(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.ADMIN)
   @Patch(':id')
   async updateUser(
@@ -37,7 +36,6 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.ADMIN)
   @Patch(':id/role')
   async updateRole(
@@ -47,7 +45,6 @@ export class UsersController {
     return this.usersService.updateRole(id, updateUserRoleDto);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.ADMIN)
   @Patch(':id/permissions')
   async updatePermissions(

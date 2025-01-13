@@ -39,14 +39,14 @@ export class DocumentsService {
   }
 
   async update(id: string, updateDocumentDto: UpdateDocumentDto): Promise<Document> {
-    this.logger.log(`Updating document with ID: ${id}`);
+    this.logger.log(`Updating document with ID: ${id} ${updateDocumentDto}`);
     await this.documentsRepository.update(id, updateDocumentDto);
     return this.findOne(id);
   }
 
   async remove(id: string): Promise<void> {
     this.logger.log(`Removing document with ID: ${id}`);
-    const result = await this.documentsRepository.delete(id);
+    const result = await this.documentsRepository.delete(id); // soft delete
     if (result.affected === 0) {
       this.logger.warn(`Document with ID: ${id} not found`);
       throw new NotFoundException('Document not found');

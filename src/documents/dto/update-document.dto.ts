@@ -1,11 +1,6 @@
-import { IsOptional, IsString } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateDocumentDto } from './create-document.dto';
 
-export class UpdateDocumentDto {
-  @IsString()
-  @IsOptional()
-  title?: string;
-
-  @IsString()
-  @IsOptional()
-  description?: string;
+export class UpdateDocumentDto extends PartialType(CreateDocumentDto) {
+  filePath?: string; // Add filePath as an optional field
 } 
