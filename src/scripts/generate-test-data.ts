@@ -1,7 +1,7 @@
 import { createConnection } from 'typeorm';
-import { User } from '../users/user.entity';
+import { User, UserRole } from '../users/user.entity';
 import { Document } from '../documents/document.entity';
-import * as faker from 'faker';
+import { faker } from '@faker-js/faker';
 
 async function generateTestData() {
   const connection = await createConnection();
@@ -13,7 +13,7 @@ async function generateTestData() {
     const user = userRepository.create({
       email: faker.internet.email(),
       password: faker.internet.password(),
-      role: faker.random.arrayElement(['admin', 'editor', 'viewer']),
+      role: faker.helpers.arrayElement(['admin', 'editor', 'viewer']) as UserRole,
     });
     await userRepository.save(user);
   }

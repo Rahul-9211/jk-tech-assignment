@@ -14,10 +14,11 @@ export class IngestionService {
   private processes: Map<string, IngestionProcess> = new Map();
 
   constructor() {
+    const rabbitMQUrl = process.env.RABBITMQ_URL || 'amqp://user:password@localhost:5672';
     this.client = ClientProxyFactory.create({
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://localhost:5672'],
+        urls: [rabbitMQUrl],
         queue: 'ingestion_queue',
         queueOptions: {
           durable: false,

@@ -13,6 +13,16 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "5672:5672"  # RabbitMQ client port
+      - "15672:15672" # RabbitMQ management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+
   app:
     build: .
     restart: always
@@ -25,8 +35,10 @@ services:
       DB_PASSWORD: your_password
       DB_DATABASE: document_management
       JWT_SECRET: jwt_secret
+      RABBITMQ_URL: amqp://user:password@rabbitmq:5672
     depends_on:
       - db
+      - rabbitmq
 
 volumes:
   postgres_data: 
