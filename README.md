@@ -131,42 +131,51 @@ To set up and run the application using Docker Compose, follow these steps:
 4. Access the application at `http://localhost:3000`.
 5. Access the RabbitMQ management UI at `http://localhost:15672` with the default credentials specified in the `docker-compose.yml` file.
 
-
 ## Installation
-bash
+
+```bash
 $ npm install
+```
 
 ## Running the App
-bash
-development
+
+```bash
+# development
 $ npm run start
-watch mode
+
+# watch mode
 $ npm run start:dev
-production mode
+
+# production mode
 $ npm run start:prod
+```
 
 ## Testing
 
-bash
-unit tests
+```bash
+# unit tests
 $ npm run test
-e2e tests
+
+# e2e tests
 $ npm run test:e2e
-test coverage
+
+# test coverage
 $ npm run test:cov
+```
 
 ## Environment Variables
 
 Ensure you have a `.env` file with the following variables:
-plaintext
-- DB_HOST= `your_database_host`
-- DB_PORT= `your_database_port`
-- DB_USERNAME= `your_database_username`
-- DB_PASSWORD= `your_database_password`
-- DB_DATABASE= `your_database_name`
-- PYTHON_BACKEND_URL= `http://localhost:5000`
-- RABBITMQ_URL= `amqp://user:password@rabbitmq:5672`
 
+```plaintext
+DB_HOST=your_database_host
+DB_PORT=your_database_port
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
+DB_DATABASE=your_database_name
+PYTHON_BACKEND_URL=http://localhost:5000
+RABBITMQ_URL=amqp://user:password@rabbitmq:5672
+```
 
 ## Support
 
