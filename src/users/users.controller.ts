@@ -15,11 +15,11 @@ import { UpdateUserPermissionsDto } from './dto/update-user-permissions.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-
-//   @Post('signup')
-//   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
-//     return this.usersService.create(createUserDto);
-//   }
+  @Roles(UserRole.ADMIN)
+  @Post('signup')
+  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.usersService.create(createUserDto);
+  }
 
   @Roles(UserRole.ADMIN)
   @Get()
