@@ -5,6 +5,9 @@ import { Document } from './document.entity';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
 
+/**
+ * Service to manage document operations.
+ */
 @Injectable()
 export class DocumentsService {
   private readonly logger = new Logger(DocumentsService.name);
@@ -14,6 +17,12 @@ export class DocumentsService {
     private documentsRepository: Repository<Document>,
   ) {}
 
+  /**
+   * Creates a new document.
+   * @param createDocumentDto - Data transfer object for creating a document.
+   * @param filePath - Path to the uploaded file.
+   * @returns The created document.
+   */
   async create(createDocumentDto: CreateDocumentDto, filePath: string): Promise<Document> {
     this.logger.log(`Saving document with title: ${createDocumentDto.title}`);
     const document = this.documentsRepository.create({
